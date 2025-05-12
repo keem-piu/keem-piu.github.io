@@ -188,42 +188,124 @@
                 font-size: 1rem;
             }
         }
+
+        /* CLICK TO ENTER STYLES */
+        .enter-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 30px;
+            background-color: #6c5ce7;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: 3px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .enter-button:hover {
+            background-color: #5a4bd1;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        .enter-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #6c5ce7;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .enter-container h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .enter-container p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        /* GİZLİ İÇERİK */
+        .main-content {
+            display: none;
+        }
+
+        /* GÖRÜNÜR İÇERİK */
+        .main-content.visible {
+            display: block;
+        }
     </style>
 </head>
 <body>
-    <!-- TAM ORTALANMIŞ HEADER -->
-    <header>
-        <div class="container">
-            <h1>Keempiu</h1>
-            <p>Keempiu Hoş Geldiniz</p>
-        </div>
-    </header>
+    <!-- CLICK TO ENTER EKRANI -->
+    <div id="enter-screen" class="enter-container">
+        <h1>Keempiu</h1>
+        <p>Hoş Geldiniz</p>
+        <a href="#" id="enter-button" class="enter-button">Click to Enter</a>
+    </div>
 
-    <main>
-        <div class="container">
-            <h2></h2>
+    <!-- ANA İÇERİK (BAŞLANGIÇTA GİZLİ) -->
+    <div id="main-content" class="main-content">
+        <!-- TAM ORTALANMIŞ HEADER -->
+        <header>
+            <div class="container">
+                <h1>Keempiu</h1>
+                <p>Keempiu Hoş Geldiniz</p>
+            </div>
+        </header>
 
-            <!-- SOSYAL MEDYA BÖLÜMÜ (ICONLAR EKLENDİ) -->
-            <div class="social-section">
-                <div class="social-links">
-                    <a href="https://instagram.com/keem-piu" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-                    <a href="https://x.com/keem-piu" target="_blank"><i class="fa-brands fa-x-twitter"></i> Twitter (X)</a>
-                    <a href="https://kick.com/keem-piu" target="_blank"><i class="fa-brands fa-kickstarter"></i> Kick</a>
-                    <a href="https://bsky.app/keem-piu" target="_blank"><i class="fas fa-cloud"></i> Bluesky</a>
-                    <a href="https://youtube.com/keem-piu" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
-                    <a href="https://discord.com/keem-piu" target="_blank"><i class="fab fa-discord"></i> Discord</a>
-                    <a href="https://tiktok.com/keem-piu" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+        <main>
+            <div class="container">
+                <h2></h2>
+
+                <!-- SOSYAL MEDYA BÖLÜMÜ (ICONLAR EKLENDİ) -->
+                <div class="social-section">
+                    <div class="social-links">
+                        <a href="https://instagram.com/keem-piu" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="https://x.com/keem-piu" target="_blank"><i class="fa-brands fa-x-twitter"></i> Twitter (X)</a>
+                        <a href="https://kick.com/keem-piu" target="_blank"><i class="fa-brands fa-kickstarter"></i> Kick</a>
+                        <a href="https://bsky.app/keem-piu" target="_blank"><i class="fas fa-cloud"></i> Bluesky</a>
+                        <a href="https://youtube.com/keem-piu" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                        <a href="https://discord.com/keem-piu" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+                        <a href="https://tiktok.com/keem-piu" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-copyright">
-                © 2025 <strong>Keempiu®</strong> | Tüm hakları saklıdır
+        <footer>
+            <div class="container">
+                <div class="footer-copyright">
+                    © 2025 <strong>Keempiu®</strong> | Tüm hakları saklıdır
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
+
+    <script>
+        // Click to Enter butonuna tıklanınca ana içeriği göster
+        document.getElementById('enter-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('enter-screen').style.display = 'none';
+            document.getElementById('main-content').classList.add('visible');
+            
+            // URL'yi değiştir (isteğe bağlı)
+            window.history.pushState(null, null, window.location.href.split('#')[0]);
+        });
+
+        // Sayfa yenilendiğinde enter ekranını göster
+        window.addEventListener('load', function() {
+            document.getElementById('enter-screen').style.display = 'flex';
+            document.getElementById('main-content').classList.remove('visible');
+        });
+    </script>
 </body>
 </html>
