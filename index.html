@@ -4,79 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keempiu - Keempiu Dünyası</title>
-    <!-- Favicon -->
-    <link rel="icon" href="https://raw.githubusercontent.com/keem-piu/keem-piu.github.io/refs/heads/main/logo.svg" type="image/png">
-    <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- GÜNCEL Font Awesome CDN (6.5.2) -->
+    <link rel="icon" href="https://raw.githubusercontent.com/keem-piu/keem-piu.github.io/main/logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
-        /* RESET VE TEMEL STİLLER */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        body {
             font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
             background-color: #f5f5f5;
             color: #333;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
 
-        /* CONTAINER */
-        .container {
+        /* ENTER SCREEN STYLES */
+        #enter-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 1200px;
-            padding: 0 20px;
-            margin: 0 auto;
+            height: 100%;
+            background-color: #6c5ce7;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            text-align: center;
+            padding: 20px;
         }
 
-        /* HEADER - TAM ORTALANMIŞ */
+        #enter-screen h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        #enter-screen p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .enter-button {
+            padding: 15px 30px;
+            background-color: white;
+            color: #6c5ce7;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .enter-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* MAIN CONTENT STYLES */
+        #main-content {
+            display: none;
+            flex: 1;
+            flex-direction: column;
+        }
+
+        #main-content.visible {
+            display: flex;
+        }
+
         header {
-            width: 100%;
             background-color: #6c5ce7;
             color: white;
             padding: 60px 0;
             text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            min-height: 300px;
-        }
-
-        header h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-        }
-
-        header p {
-            font-size: 1.5rem;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        /* ANA İÇERİK */
-        main {
-            flex: 1;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        /* SOSYAL MEDYA ALANI */
-        .social-section {
-            margin: 40px 0;
-            width: 100%;
         }
 
         .social-links {
@@ -84,190 +91,93 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 15px;
-            margin-top: 20px;
+            margin: 40px 0;
+            padding: 0 20px;
         }
 
         .social-links a {
             color: #6c5ce7;
             text-decoration: none;
-            font-weight: 600;
             padding: 12px 20px;
             border: 2px solid #6c5ce7;
             border-radius: 30px;
             transition: all 0.3s ease;
-            font-size: 1.1rem;
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 600;
         }
 
         /* Sosyal medya özel renkleri */
         .social-links a[href*="instagram"]:hover {
             background-color: #E1306C;
-            border-color: #E1306C;
             color: white;
+            border-color: #E1306C;
         }
 
         .social-links a[href*="twitter"]:hover,
         .social-links a[href*="x.com"]:hover {
-         background-color: #1DA1F2;
-         border-color: #1DA1F2;
-         color: white;
             background-color: #1DA1F2;
-            border-color: #1DA1F2;
             color: white;
+            border-color: #1DA1F2;
         }
 
         .social-links a[href*="kick"]:hover {
             background-color: #53FC18;
-            border-color: #53FC18;
             color: black;
+            border-color: #53FC18;
         }
 
         .social-links a[href*="bsky.app"]:hover {
             background-color: #0085ff;
-            border-color: #0085ff;
             color: white;
+            border-color: #0085ff;
         }
 
         .social-links a[href*="youtube"]:hover {
             background-color: #FF0000;
-            border-color: #FF0000;
             color: white;
+            border-color: #FF0000;
         }
 
         .social-links a[href*="discord"]:hover {
             background-color: #5865F2;
-            border-color: #5865F2;
             color: white;
+            border-color: #5865F2;
         }
 
         .social-links a[href*="tiktok"]:hover {
             background-color: #000000;
-            border-color: #000000;
             color: white;
+            border-color: #000000;
         }
 
         .social-links a:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        .social-links a i {
-            font-size: 1.2rem;
-        }
-
-        /* FOOTER - SAYFANIN ALTINA SABİTLENMİŞ */
+        /* FOOTER STYLES */
         footer {
-            width: 100%;
             background-color: #000;
             color: #fff;
             padding: 20px 0;
             text-align: center;
-            margin-top: auto; /* Bu özellik footer'ı sayfanın en altına sabitler */
+            margin-top: auto;
         }
 
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .footer-copyright {
-            margin-top: 10px;
-            font-size: 0.9rem;
-        }
-
-        /* MOBİL UYUMLULUK */
-        @media (max-width: 768px) {
-            header {
-                padding: 40px 0;
-                min-height: 200px;
-            }
-            header h1 {
-                font-size: 2rem;
-            }
-            header p {
-                font-size: 1.2rem;
-                padding: 0 20px;
-            }
-            .social-links {
-                gap: 10px;
-            }
-            .social-links a {
-                padding: 10px 15px;
-                font-size: 1rem;
-            }
-            footer {
-                padding: 15px 0;
-            }
-            .footer-copyright {
-                font-size: 0.8rem;
-            }
-        }
-
-        /* CLICK TO ENTER STYLES */
-        .enter-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 15px 30px;
-            background-color: #6c5ce7;
-            color: white;
-            text-decoration: none;
-            font-size: 1.5rem;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            border: 3px solid white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-
-        .enter-button:hover {
-            background-color: #5a4bd1;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-        }
-
-        .enter-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background-color: #6c5ce7;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .enter-container h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .enter-container p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            max-width: 600px;
-        }
-
-        /* GİZLİ İÇERİK */
-        .main-content {
-            display: none;
-        }
-
-        /* GÖRÜNÜR İÇERİK */
-        .main-content.visible {
-            display: flex;
-            flex-direction: column;
-            min-height: calc(100vh - 0px); /* Footer yüksekliğini hesaba katar */
-        }
-
-        /* MÜZİK KONTROL BUTONU */
-        .music-control {
+        /* MUSIC CONTROL STYLES */
+        .music-control-container {
             position: fixed;
-            bottom: 80px; /* Footer'ın üstünde */
+            bottom: 80px;
             right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .music-control {
             background-color: #6c5ce7;
             color: white;
             width: 50px;
@@ -277,89 +187,112 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .volume-slider {
+            width: 0;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .music-control-container:hover .volume-slider {
+            width: 100px;
+            opacity: 1;
+        }
+
+        /* RESPONSIVE STYLES */
+        @media (max-width: 768px) {
+            #enter-screen h1 {
+                font-size: 2rem;
+            }
+            .enter-button {
+                font-size: 1.2rem;
+                padding: 12px 24px;
+            }
+            .music-control-container {
+                bottom: 70px;
+            }
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            .social-links a {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- MÜZİK KONTROL BUTONU -->
-    <div class="music-control" id="musicControl">
-        <i class="fas fa-music"></i>
+    <!-- MUSIC CONTROL -->
+    <div class="music-control-container">
+        <input type="range" min="0" max="1" step="0.01" value="0.7" class="volume-slider" id="volumeSlider">
+        <div class="music-control" id="musicControl">
+            <i class="fas fa-music"></i>
+        </div>
     </div>
 
-    <!-- CLICK TO ENTER EKRANI -->
-    <div id="enter-screen" class="enter-container">
+    <!-- ENTER SCREEN -->
+    <div id="enter-screen">
         <h1>Keempiu</h1>
         <p>Hoş Geldiniz</p>
-        <a href="#" id="enter-button" class="enter-button">Click to Enter</a>
+        <button id="enter-button" class="enter-button">Click to Enter</button>
     </div>
 
-    <!-- ANA İÇERİK (BAŞLANGIÇTA GİZLİ) -->
-    <div id="main-content" class="main-content">
-        <!-- TAM ORTALANMIŞ HEADER -->
+    <!-- MAIN CONTENT -->
+    <div id="main-content">
         <header>
-            <div class="container">
-                <h1>Keempiu</h1>
-                <p>Keempiu Hoş Geldiniz</p>
-            </div>
+            <h1>Keempiu</h1>
+            <p>Keempiu Hoş Geldiniz</p>
         </header>
 
         <main>
-            <div class="container">
-                <h2></h2>
-
-                <!-- SOSYAL MEDYA BÖLÜMÜ (ICONLAR EKLENDİ) -->
-                <div class="social-section">
-                    <div class="social-links">
-                        <a href="https://instagram.com/keem-piu" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-                        <a href="https://x.com/keem-piu" target="_blank"><i class="fa-brands fa-x-twitter"></i> Twitter (X)</a>
-                        <a href="https://kick.com/keem-piu" target="_blank"><i class="fa-brands fa-kickstarter"></i> Kick</a>
-                        <a href="https://bsky.app/keem-piu" target="_blank"><i class="fas fa-cloud"></i> Bluesky</a>
-                        <a href="https://youtube.com/keem-piu" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
-                        <a href="https://discord.com/keem-piu" target="_blank"><i class="fab fa-discord"></i> Discord</a>
-                        <a href="https://tiktok.com/keem-piu" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
-                    </div>
-                </div>
+            <div class="social-links">
+                <a href="https://instagram.com/keem-piu" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://x.com/keem-piu" target="_blank"><i class="fab fa-x-twitter"></i> Twitter (X)</a>
+                <a href="https://kick.com/keem-piu" target="_blank"><i class="fas fa-gamepad"></i> Kick</a>
+                <a href="https://bsky.app/keem-piu" target="_blank"><i class="fas fa-cloud"></i> Bluesky</a>
+                <a href="https://youtube.com/keem-piu" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                <a href="https://discord.com/keem-piu" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+                <a href="https://tiktok.com/keem-piu" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
             </div>
         </main>
 
-        <!-- FOOTER - SAYFANIN EN ALTINDA -->
         <footer>
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-copyright">
-                        © 2025 <strong>Keempiu®</strong> | Tüm hakları saklıdır
-                    </div>
-                </div>
-            </div>
+            <p>© 2025 <strong>Keempiu®</strong> | Tüm hakları saklıdır</p>
         </footer>
     </div>
 
-    <!-- MÜZİK ELEMENTİ (GİZLİ) -->
+    <!-- AUDIO ELEMENT -->
     <audio id="backgroundMusic" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        Tarayıcınız audio elementini desteklemiyor.
     </audio>
 
     <script>
-        // Müzik çalma fonksiyonu
-        function playBackgroundMusic() {
+        document.addEventListener('DOMContentLoaded', function() {
+            const enterButton = document.getElementById('enter-button');
+            const enterScreen = document.getElementById('enter-screen');
+            const mainContent = document.getElementById('main-content');
             const music = document.getElementById('backgroundMusic');
             const musicControl = document.getElementById('musicControl');
-            
-            // Kullanıcı etkileşimi olmadan otomatik çalmayı sağlamak için
-            document.addEventListener('click', function() {
-                music.play()
-                    .then(() => {
-                        console.log('Müzik çalıyor');
-                    })
-                    .catch(error => {
-                        console.log('Müzik çalma hatası:', error);
-                    });
-            }, { once: true }); // Sadece bir kere dinleyici ekler
+            const volumeSlider = document.getElementById('volumeSlider');
 
-            // Müzik kontrol butonu
+            // Handle enter button click
+            enterButton.addEventListener('click', function() {
+                enterScreen.style.display = 'none';
+                mainContent.classList.add('visible');
+                
+                // Try to play music (requires user interaction)
+                music.play().catch(e => console.log('Music play failed:', e));
+            });
+
+            // Music control functionality
+            music.volume = volumeSlider.value;
+            
+            volumeSlider.addEventListener('input', function() {
+                music.volume = this.value;
+            });
+
             musicControl.addEventListener('click', function() {
                 if (music.paused) {
                     music.play();
@@ -369,23 +302,11 @@
                     musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
                 }
             });
-        }
 
-        // Click to Enter butonuna tıklanınca ana içeriği göster
-        document.getElementById('enter-button').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('enter-screen').style.display = 'none';
-            document.getElementById('main-content').classList.add('visible');
-            
-            // URL'yi değiştir (isteğe bağlı)
-            window.history.pushState(null, null, window.location.href.split('#')[0]);
-        });
-
-        // Sayfa yüklendiğinde müziği başlat ve enter ekranını göster
-        window.addEventListener('load', function() {
-            document.getElementById('enter-screen').style.display = 'flex';
-            document.getElementById('main-content').classList.remove('visible');
-            playBackgroundMusic();
+            // Initialize music control icon
+            musicControl.innerHTML = music.paused ? 
+                '<i class="fas fa-volume-mute"></i>' : 
+                '<i class="fas fa-music"></i>';
         });
     </script>
 </body>
