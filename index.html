@@ -157,14 +157,26 @@
             font-size: 1.2rem;
         }
 
-        /* FOOTER */
+        /* FOOTER - SAYFANIN ALTINA SABİTLENMİŞ */
         footer {
             width: 100%;
             background-color: #000;
             color: #fff;
-            padding: 40px 0;
+            padding: 20px 0;
             text-align: center;
-            margin-top: auto;
+            margin-top: auto; /* Bu özellik footer'ı sayfanın en altına sabitler */
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-copyright {
+            margin-top: 10px;
+            font-size: 0.9rem;
         }
 
         /* MOBİL UYUMLULUK */
@@ -186,6 +198,12 @@
             .social-links a {
                 padding: 10px 15px;
                 font-size: 1rem;
+            }
+            footer {
+                padding: 15px 0;
+            }
+            .footer-copyright {
+                font-size: 0.8rem;
             }
         }
 
@@ -240,13 +258,15 @@
 
         /* GÖRÜNÜR İÇERİK */
         .main-content.visible {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 80px); /* Footer yüksekliğini hesaba katar */
         }
 
         /* MÜZİK KONTROL BUTONU */
         .music-control {
             position: fixed;
-            bottom: 20px;
+            bottom: 70px; /* Footer'ın üstünde */
             right: 20px;
             background-color: #6c5ce7;
             color: white;
@@ -304,10 +324,13 @@
             </div>
         </main>
 
+        <!-- FOOTER - SAYFANIN EN ALTINDA -->
         <footer>
             <div class="container">
-                <div class="footer-copyright">
-                    © 2025 <strong>Keempiu®</strong> | Tüm hakları saklıdır
+                <div class="footer-content">
+                    <div class="footer-copyright">
+                        © 2025 <strong>Keempiu®</strong> | Tüm hakları saklıdır
+                    </div>
                 </div>
             </div>
         </footer>
