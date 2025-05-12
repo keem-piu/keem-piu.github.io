@@ -242,9 +242,32 @@
         .main-content.visible {
             display: block;
         }
+
+        /* MÜZİK KONTROL BUTONU */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #6c5ce7;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
+    <!-- MÜZİK KONTROL BUTONU -->
+    <div class="music-control" id="musicControl">
+        <i class="fas fa-music"></i>
+    </div>
+
     <!-- CLICK TO ENTER EKRANI -->
     <div id="enter-screen" class="enter-container">
         <h1>Keempiu</h1>
@@ -290,7 +313,41 @@
         </footer>
     </div>
 
+    <!-- MÜZİK ELEMENTİ (GİZLİ) -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Tarayıcınız audio elementini desteklemiyor.
+    </audio>
+
     <script>
+        // Müzik çalma fonksiyonu
+        function playBackgroundMusic() {
+            const music = document.getElementById('backgroundMusic');
+            const musicControl = document.getElementById('musicControl');
+            
+            // Kullanıcı etkileşimi olmadan otomatik çalmayı sağlamak için
+            document.addEventListener('click', function() {
+                music.play()
+                    .then(() => {
+                        console.log('Müzik çalıyor');
+                    })
+                    .catch(error => {
+                        console.log('Müzik çalma hatası:', error);
+                    });
+            }, { once: true }); // Sadece bir kere dinleyici ekler
+
+            // Müzik kontrol butonu
+            musicControl.addEventListener('click', function() {
+                if (music.paused) {
+                    music.play();
+                    musicControl.innerHTML = '<i class="fas fa-music"></i>';
+                } else {
+                    music.pause();
+                    musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                }
+            });
+        }
+
         // Click to Enter butonuna tıklanınca ana içeriği göster
         document.getElementById('enter-button').addEventListener('click', function(e) {
             e.preventDefault();
@@ -301,10 +358,11 @@
             window.history.pushState(null, null, window.location.href.split('#')[0]);
         });
 
-        // Sayfa yenilendiğinde enter ekranını göster
+        // Sayfa yüklendiğinde müziği başlat ve enter ekranını göster
         window.addEventListener('load', function() {
             document.getElementById('enter-screen').style.display = 'flex';
             document.getElementById('main-content').classList.remove('visible');
+            playBackgroundMusic();
         });
     </script>
 </body>
