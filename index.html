@@ -3,310 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keempiu - Keempiu Dünyası</title>
-    <link rel="icon" href="https://raw.githubusercontent.com/keem-piu/keem-piu.github.io/main/logo.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Keempiu Hog Goldfrist</title>
     <style>
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            overflow: hidden;
+            height: 100vh;
         }
         
-        body {
-            background-color: #f5f5f5;
-            color: #333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* ENTER SCREEN STYLES */
-        #enter-screen {
+        .video-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #6c5ce7;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            text-align: center;
-            padding: 20px;
+            z-index: -1;
+            overflow: hidden;
         }
-
-        #enter-screen h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
+        
+        #entranceVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4) blur(12px);
         }
-
-        #enter-screen p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            max-width: 600px;
-        }
-
-        .enter-button {
-            padding: 15px 30px;
-            background-color: white;
-            color: #6c5ce7;
-            border-radius: 50px;
-            font-size: 1.5rem;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .enter-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        /* MAIN CONTENT STYLES */
-        #main-content {
+        
+        #mainVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.5);
             display: none;
-            flex: 1;
-            flex-direction: column;
         }
-
-        #main-content.visible {
-            display: flex;
-        }
-
-        header {
-            background-color: #6c5ce7;
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin: 40px 0;
-            padding: 0 20px;
-        }
-
-        .social-links a {
-            color: #6c5ce7;
-            text-decoration: none;
-            padding: 12px 20px;
-            border: 2px solid #6c5ce7;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-        }
-
-        /* Sosyal medya özel renkleri */
-        .social-links a[href*="instagram"]:hover {
-            background-color: #E1306C;
-            color: white;
-            border-color: #E1306C;
-        }
-
-        .social-links a[href*="twitter"]:hover,
-        .social-links a[href*="x.com"]:hover {
-            background-color: #1DA1F2;
-            color: white;
-            border-color: #1DA1F2;
-        }
-
-        .social-links a[href*="kick"]:hover {
-            background-color: #53FC18;
-            color: black;
-            border-color: #53FC18;
-        }
-
-        .social-links a[href*="bsky.app"]:hover {
-            background-color: #0085ff;
-            color: white;
-            border-color: #0085ff;
-        }
-
-        .social-links a[href*="youtube"]:hover {
-            background-color: #FF0000;
-            color: white;
-            border-color: #FF0000;
-        }
-
-        .social-links a[href*="discord"]:hover {
-            background-color: #5865F2;
-            color: white;
-            border-color: #5865F2;
-        }
-
-        .social-links a[href*="tiktok"]:hover {
-            background-color: #000000;
-            color: white;
-            border-color: #000000;
-        }
-
-        .social-links a:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        /* FOOTER STYLES */
-        footer {
-            background-color: #000;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-            margin-top: auto;
-        }
-
-        /* MUSIC CONTROL STYLES */
-        .music-control-container {
+        
+        .entrance-screen {
             position: fixed;
-            bottom: 80px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        .entrance-content {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 2.5rem;
+            border-radius: 15px;
+            max-width: 80%;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .enter-button {
+            background-color: #ff5500;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            display: block;
+        }
+        
+        .main-content {
+            display: none;
+            height: 100vh;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .content {
+            text-align: center;
+            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 80%;
+        }
+        
+        /* SES KONTROL STİLLERİ */
+        .volume-control {
+            position: absolute;
+            top: 20px;
             right: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
-            z-index: 100;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 12px;
+            border-radius: 20px;
+            z-index: 10;
         }
-
-        .music-control {
-            background-color: #6c5ce7;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        
+        .volume-slider {
+            width: 80px;
             cursor: pointer;
         }
-
-        .volume-slider {
-            width: 0;
-            opacity: 0;
+        
+        .volume-icon {
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: white;
+        }
+        
+        /* SOSYAL MEDYA BUTONLARI (GÜNCELLENDİ) */
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding: 0 10px;
+        }
+        
+        .social-link {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 12px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            min-width: 120px;
+            justify-content: center;
+            backdrop-filter: blur(5px);
         }
-
-        .music-control-container:hover .volume-slider {
-            width: 100px;
-            opacity: 1;
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-
-        /* RESPONSIVE STYLES */
-        @media (max-width: 768px) {
-            #enter-screen h1 {
-                font-size: 2rem;
-            }
-            .enter-button {
-                font-size: 1.2rem;
-                padding: 12px 24px;
-            }
-            .music-control-container {
-                bottom: 70px;
-            }
-            .social-links {
-                flex-direction: column;
-                align-items: center;
-            }
-            .social-links a {
-                width: 100%;
-                justify-content: center;
-            }
+        
+        .social-link i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        /* SOSYAL MEDYA İKON RENKLERİ (GÜNCELLENDİ) */
+        .fa-instagram { color: #E1306C; }
+        .fa-twitter { color: #1DA1F2; }
+        .fa-hand-rock { color: #00E14C; } /* Kick */
+        .fa-facebook { color: #1877F2; } /* BlueMy */
+        .fa-youtube { color: #FF0000; }
+        .fa-discord { color: #5865F2; }
+        .fa-tiktok { 
+            color: #000000; 
+            background: linear-gradient(90deg, #25F4EE, #000000, #FE2C55);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .music-warning {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+            text-align: center;
+            max-width: 80%;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- MUSIC CONTROL -->
-    <div class="music-control-container">
-        <input type="range" min="0" max="1" step="0.01" value="0.7" class="volume-slider" id="volumeSlider">
-        <div class="music-control" id="musicControl">
-            <i class="fas fa-music"></i>
+    <div class="video-container">
+        <video autoplay muted loop id="entranceVideo">
+            <source src="https://i.imgflip.com/51g8j3.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="video-container">
+        <video autoplay muted loop id="mainVideo">
+            <source src="https://i.imgflip.com/51g8j3.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="entrance-screen" id="entranceScreen">
+        <div class="entrance-content">
+            <h1>Keempiu</h1>
+            <div class="subtitle">Hoş Geldiniz</div>
+            <button class="enter-button" id="enterButton">Click to Enter</button>
+        </div>
+    </div>
+    
+    <div class="main-content" id="mainContent">
+        <div class="content">
+            <div class="volume-control">
+                <i class="fas fa-volume-up volume-icon" id="volumeIcon"></i>
+                <input type="range" min="0" max="1" step="0.01" value="0.5" class="volume-slider" id="volumeSlider">
+            </div>
+            
+            <h1>Keempiu</h1>
+            <div class="subtitle">Hog Goldfrist</div>
+            
+            <div class="social-links">
+                <a href="https://instagram.com" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="https://twitter.com" target="_blank" class="social-link">
+                    <i class="fab fa-twitter"></i> Twitter
+                </a>
+                <a href="https://kick.com" target="_blank" class="social-link">
+                    <i class="fas fa-hand-rock"></i> Kick
+                </a>
+                <a href="https://facebook.com" target="_blank" class="social-link">
+                    <i class="fab fa-facebook"></i> BlueMy
+                </a>
+                <a href="https://youtube.com" target="_blank" class="social-link">
+                    <i class="fab fa-youtube"></i> YouTube
+                </a>
+                <a href="https://discord.com" target="_blank" class="social-link">
+                    <i class="fab fa-discord"></i> Discord
+                </a>
+                <a href="https://tiktok.com" target="_blank" class="social-link">
+                    <i class="fab fa-tiktok"></i> TikTok
+                </a>
+            </div>
         </div>
     </div>
 
-    <!-- ENTER SCREEN -->
-    <div id="enter-screen">
-        <h1>Keempiu</h1>
-        <p>Hoş Geldiniz</p>
-        <button id="enter-button" class="enter-button">Click to Enter</button>
+    <div class="music-warning" id="musicWarning">
+        Müzik otomatik çalmıyorsa, lütfen sesi manuel olarak açın.
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main-content">
-        <header>
-            <h1>Keempiu</h1>
-            <p>Keempiu Hoş Geldiniz</p>
-        </header>
-
-        <main>
-            <div class="social-links">
-                <a href="https://instagram.com/keem-piu" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-                <a href="https://x.com/keem-piu" target="_blank"><i class="fab fa-x-twitter"></i> Twitter (X)</a>
-                <a href="https://kick.com/keem-piu" target="_blank"><i class="fa-brands fa-kickstarter"></i> Kick</a>
-                <a href="https://bsky.app/keem-piu" target="_blank"><i class="fas fa-cloud"></i> Bluesky</a>
-                <a href="https://youtube.com/keem-piu" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
-                <a href="https://discord.com/keem-piu" target="_blank"><i class="fab fa-discord"></i> Discord</a>
-                <a href="https://tiktok.com/keem-piu" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
-            </div>
-        </main>
-
-        <footer>
-            <p>© 2025 <strong>Keempiu®</strong> | Tüm hakları saklıdır</p>
-        </footer>
-    </div>
-
-    <!-- AUDIO ELEMENT -->
-    <audio id="backgroundMusic" loop>
+    <audio id="backgroundMusic" loop preload="auto">
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const enterButton = document.getElementById('enter-button');
-            const enterScreen = document.getElementById('enter-screen');
-            const mainContent = document.getElementById('main-content');
-            const music = document.getElementById('backgroundMusic');
-            const musicControl = document.getElementById('musicControl');
-            const volumeSlider = document.getElementById('volumeSlider');
+        const enterButton = document.getElementById('enterButton');
+        const entranceScreen = document.getElementById('entranceScreen');
+        const mainContent = document.getElementById('mainContent');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeIcon = document.getElementById('volumeIcon');
+        const musicWarning = document.getElementById('musicWarning');
+        const entranceVideo = document.getElementById('entranceVideo');
+        const mainVideo = document.getElementById('mainVideo');
 
-            // Handle enter button click
-            enterButton.addEventListener('click', function() {
-                enterScreen.style.display = 'none';
-                mainContent.classList.add('visible');
-                
-                // Try to play music (requires user interaction)
-                music.play().catch(e => console.log('Music play failed:', e));
-            });
+        function updateVolumeIcon() {
+            if (backgroundMusic.volume == 0) {
+                volumeIcon.className = 'fas fa-volume-mute volume-icon';
+            } else if (backgroundMusic.volume < 0.5) {
+                volumeIcon.className = 'fas fa-volume-down volume-icon';
+            } else {
+                volumeIcon.className = 'fas fa-volume-up volume-icon';
+            }
+        }
 
-            // Music control functionality
-            music.volume = volumeSlider.value;
+        enterButton.addEventListener('click', function() {
+            entranceVideo.style.display = 'none';
+            mainVideo.style.display = 'block';
+            entranceScreen.style.display = 'none';
+            mainContent.style.display = 'flex';
             
-            volumeSlider.addEventListener('input', function() {
-                music.volume = this.value;
-            });
+            backgroundMusic.volume = volumeSlider.value;
+            const playPromise = backgroundMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    musicWarning.style.display = 'block';
+                    setTimeout(() => {
+                        musicWarning.style.display = 'none';
+                    }, 5000);
+                });
+            }
+        });
 
-            musicControl.addEventListener('click', function() {
-                if (music.paused) {
-                    music.play();
-                    musicControl.innerHTML = '<i class="fas fa-music"></i>';
-                } else {
-                    music.pause();
-                    musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                }
-            });
+        volumeSlider.addEventListener('input', function() {
+            backgroundMusic.volume = this.value;
+            updateVolumeIcon();
+        });
 
-            // Initialize music control icon
-            musicControl.innerHTML = music.paused ? 
-                '<i class="fas fa-volume-mute"></i>' : 
-                '<i class="fas fa-music"></i>';
+        volumeIcon.addEventListener('click', function() {
+            if (backgroundMusic.volume > 0) {
+                volumeSlider.dataset.prevVolume = backgroundMusic.volume;
+                backgroundMusic.volume = 0;
+                volumeSlider.value = 0;
+            } else {
+                const prevVolume = volumeSlider.dataset.prevVolume || 0.5;
+                backgroundMusic.volume = prevVolume;
+                volumeSlider.value = prevVolume;
+            }
+            updateVolumeIcon();
+        });
+
+        window.addEventListener('load', function() {
+            entranceVideo.play();
+            mainVideo.play();
+            backgroundMusic.volume = 0.5;
+            volumeSlider.value = 0.5;
         });
     </script>
 </body>
